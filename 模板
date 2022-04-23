@@ -1,0 +1,25 @@
+<!-- ---
+title: 照片
+date: 2022-02-02 22:17:49
+copyright_author: xxxx
+copyright_author_href: https://xxxxxx.com
+copyright_url: https://xxxxxx.com
+copyright_info: 此文章版权归xxxxx所有，如有转载，请註明来自原作者
+tags:
+  - 技术
+categories: 技术
+#sticky: 1 置顶
+#top: 1
+---
+
+## 思路（这个是二级标题）
+下面的是列表
+1. 找到 `/etc/my.conf` 文件，在 `[mysqld]` 一行下面加上 `skip-grant-tables`，跳过权限验证。
+2. 然后运行 `service mysqld restart` 重启一下`mysql`，注意是`mysqld`不是`mysql`。
+3. 运行 `mysql -u root -p` 登录 root 用户。
+4. 登录成功后可以用 `show databases;`命令 看看所有的数据库是否都显示出来了。注意记得加上`;`
+5. 执行：`use mysql;` 这时候显示 `Database changed`
+6. 执行：`flush privileges;`
+7. 执行：`grant all privileges on *.* to root@'localhost' identified by "a123456" with grant option; `，这一步是很重要的一步，就是为了把所有权限授予给 root 用户
+8. 去掉第一步 `/etc/my.conf` 文件里的`skip-grant-tables`
+9. 执行：`service mysqld restart`，重启 mysql
